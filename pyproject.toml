@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "country_capitals"
+description = "Get the name of a country's capital city."
+version = "1.0.0"
+keywords = ["countries", "capitals", "ISO 3166", "ISO 3166-1"]
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Kosay Jabre", email = "kosay.jabre@gmail.com" }]
+requires-python = ">=3.7"
+dependencies = ["pycountry"]
