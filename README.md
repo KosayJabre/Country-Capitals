@@ -25,3 +25,14 @@ The following identifiers are supported:
 - `pycountry` country objects
 
 Including `fuzzy=True` will try to use use a fuzzy matching algorithm to find the country name.
+
+## Development
+Run the tests:
+```
+python -m unittest
+```
+
+Build the package:
+```
+python -m build
+```
