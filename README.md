@@ -10,11 +10,11 @@ pip install country-capitals
 ```python
 from country_capitals import get_capital
 
-get_capital("Germany")
-get_capital("Germ", fuzzy=True)
-get_capital("DEU")
-get_capital("DE")
-get_capital("276")
+get_capital("Germany") -> "Berlin"
+get_capital("Germ", fuzzy=True) -> "Berlin"
+get_capital("DEU") -> "Berlin"
+get_capital("DE") -> "Berlin"
+get_capital("276") -> "Berlin"
 ```
 
 The following identifiers are supported:
