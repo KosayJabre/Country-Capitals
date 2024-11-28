@@ -18,7 +18,7 @@ get_capital("DE")
 get_capital("276")
 ```
 
-For ISO codes specifically, you can use `get_capital_by_iso_code` or any of the more specific functions:
+For ISO 3166-1 codes specifically, you can use `get_capital_by_iso_code` or any of the more specific functions:
 ```python
 from country_capitals import get_capital_by_iso_code, get_capital_by_numeric, get_capital_by_alpha2, get_capital_by_alpha3
 
