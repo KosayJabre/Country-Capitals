@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "country_capitals"
 description = "Get the name of a country's capital city."
-version = "1.0.0"
+version = "1.0.1"
 keywords = ["countries", "capitals", "ISO 3166", "ISO 3166-1"]
 readme = "README.md"
 license = { file = "LICENSE" }
