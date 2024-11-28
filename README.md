@@ -3,7 +3,7 @@ Get the name of a country's capital city. That's it.
 
 ## Installation
 ```
-pip install country-capitals
+pip install country_capitals
 ```
 
 ## Usage
