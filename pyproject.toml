@@ -12,3 +12,6 @@ license = { file = "LICENSE" }
 authors = [{ name = "Kosay Jabre", email = "kosay.jabre@gmail.com" }]
 requires-python = ">=3.7"
 dependencies = ["pycountry"]
+
+[project.urls]
+Homepage = "https://github.com/KosayJabre/Country-Capitals"
