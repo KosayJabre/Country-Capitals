@@ -7,6 +7,7 @@ pip install country_capitals
 ```
 
 ## Usage
+It's pretty simple. Including `fuzzy=True` will try to use use a fuzzy matching algorithm to find the country name.
 ```python
 from country_capitals import get_capital
 
@@ -17,14 +18,20 @@ get_capital("DE")
 get_capital("276")
 ```
 
-The following identifiers are supported:
-- Country name (common, official, etc.)
-- ISO 3166-1 numeric-3 codes
-- ISO 3166-1 alpha-2 codes
-- ISO 3166-1 alpha-3 codes
-- `pycountry` country objects
+For ISO codes specifically, you can use `get_capital_by_iso_code` or any of the more specific functions:
+```python
+from country_capitals import get_capital_by_iso_code, get_capital_by_numeric, get_capital_by_alpha2, get_capital_by_alpha3
 
-Including `fuzzy=True` will try to use use a fuzzy matching algorithm to find the country name.
+get_capital_by_iso_code("DE")
+get_capital_by_iso_code("DEU")
+get_capital_by_iso_code("276")
+# or
+get_capital_by_alpha2("DE")
+get_capital_by_alpha3("DEU")
+get_capital_by_numeric("276")
+```
+
+
 
 ## Development
 Run the tests:
