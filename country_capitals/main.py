@@ -25,10 +25,10 @@ def get_capital(query: Union[str, pycountry.db.Country], fuzzy: bool = False) ->
     for func in FUNCTIONS:
         try:
             return func(query)
-        except ValueError:
+        except:
             pass
 
-    raise ValueError(f"Could not find a capital for {query}.")
+    raise CapitalNotFoundError(f"Could not find a capital for {query}.")
 
 
 def get_capital_by_iso_code(iso_code: str) -> str:
@@ -66,7 +66,10 @@ def get_capital_by_pycountry_country(country: pycountry.db.Country) -> str:
 
 
 def get_capital_by_fuzzy_name(country_name: str) -> str:
-    country = pycountry.countries.search_fuzzy(country_name)
+    try:
+        country = pycountry.countries.search_fuzzy(country_name)
+    except LookupError:
+        raise CountryNotFoundError(f"Could not find a country with name {country_name}.")
 
     if len(country) == 0:
         raise CountryNotFoundError(f"Could not find a country with name {country_name}.")
