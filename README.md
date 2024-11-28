@@ -1,5 +1,5 @@
 # Country-Capitals
-Get the name of a country's capital city. That's it. Simple wrapper around a JSON file and `pycountry` with some utils on top.
+Get the name of a country's capital city. That's it.
 
 ## Installation
 ```
