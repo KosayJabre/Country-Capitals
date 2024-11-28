@@ -1,3 +1,7 @@
+"""
+Retrieve the capital city of a country identified through various identifiers such as ISO codes or names.
+"""
+
 import json
 from typing import Union
 import importlib.resources
@@ -10,14 +14,30 @@ with importlib.resources.open_text(__package__, "capitals.json", encoding="utf-8
 
 
 class CountryNotFoundError(ValueError):
+    """Exception raised when a country cannot be found."""
+
     pass
 
 
 class CapitalNotFoundError(ValueError):
+    """Exception raised when a capital city cannot be found for a country."""
+
     pass
 
 
 def get_capital(query: Union[str, pycountry.db.Country], fuzzy: bool = False) -> str:
+    """Get the capital city of a country given a multi-type query.
+
+    Args:
+        query (Union[str, pycountry.db.Country]): Can be a name, ISO code, or pycountry Country object.
+        fuzzy (bool, optional): If True, perform a fuzzy search for the country name. Defaults to False.
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        CapitalNotFoundError: If the capital cannot be found.
+    """
     FUNCTIONS = [get_capital_by_iso_code, get_capital_by_name, get_capital_by_pycountry_country]
     if fuzzy:
         FUNCTIONS.append(get_capital_by_fuzzy_name)
@@ -32,6 +52,17 @@ def get_capital(query: Union[str, pycountry.db.Country], fuzzy: bool = False) ->
 
 
 def get_capital_by_iso_code(iso_code: str) -> str:
+    """Get the capital city of a country given its ISO code.
+
+    Args:
+        iso_code (str): The ISO code of the country (numeric, alpha-2, or alpha-3).
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        ValueError: If the ISO code is invalid.
+    """
     if iso_code.isdigit():
         return get_capital_by_numeric(iso_code)
     elif len(iso_code) == 2:
@@ -43,6 +74,18 @@ def get_capital_by_iso_code(iso_code: str) -> str:
 
 
 def get_capital_by_name(country_name: str) -> str:
+    """Get the capital city of a country given its name.
+
+    Args:
+        country_name (str): The official, common, or official name of the country.
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        CountryNotFoundError: If the country cannot be found.
+        CapitalNotFoundError: If the capital cannot be found for the country.
+    """
     country_from_name = pycountry.countries.get(name=country_name)
     country_from_common_name = pycountry.countries.get(common_name=country_name)
     country_from_official_name = pycountry.countries.get(official_name=country_name)
@@ -59,6 +102,17 @@ def get_capital_by_name(country_name: str) -> str:
 
 
 def get_capital_by_pycountry_country(country: pycountry.db.Country) -> str:
+    """Get the capital city of a country given a pycountry Country object.
+
+    Args:
+        country (pycountry.db.Country): The pycountry Country object.
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        ValueError: If the capital cannot be found for the country.
+    """
     if country.alpha_3 not in capitals:
         raise ValueError(f"Could not find a capital for country with alpha_3 ISO code {country.alpha_3}.")
 
@@ -66,6 +120,18 @@ def get_capital_by_pycountry_country(country: pycountry.db.Country) -> str:
 
 
 def get_capital_by_fuzzy_name(country_name: str) -> str:
+    """Get the capital city of a country given a country name using fuzzy search.
+
+    Args:
+        country_name (str): The approximate name of the country.
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        CountryNotFoundError: If the country cannot be found.
+        CapitalNotFoundError: If the capital cannot be found for the country.
+    """
     try:
         country = pycountry.countries.search_fuzzy(country_name)
     except LookupError:
@@ -81,6 +147,19 @@ def get_capital_by_fuzzy_name(country_name: str) -> str:
 
 
 def get_capital_by_numeric(numeric: str) -> str:
+    """Get the capital city of a country given its numeric ISO code.
+
+    Args:
+        numeric (str): The numeric ISO code of the country.
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        ValueError: If the numeric code is invalid.
+        CountryNotFoundError: If the country cannot be found.
+        CapitalNotFoundError: If the capital cannot be found for the country.
+    """
     if not numeric.isdigit():
         raise ValueError(f"Invalid numeric ISO code {numeric}, must contain only digits.")
 
@@ -97,6 +176,19 @@ def get_capital_by_numeric(numeric: str) -> str:
 
 
 def get_capital_by_alpha2(alpha2: str) -> str:
+    """Get the capital city of a country given its alpha-2 ISO code.
+
+    Args:
+        alpha2 (str): The alpha-2 ISO code of the country.
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        ValueError: If the alpha-2 code is invalid.
+        CountryNotFoundError: If the country cannot be found.
+        CapitalNotFoundError: If the capital cannot be found for the country.
+    """
     if len(alpha2) != 2:
         raise ValueError(f"Invalid ISO code {alpha2}, must be 2 characters long.")
 
@@ -112,6 +204,19 @@ def get_capital_by_alpha2(alpha2: str) -> str:
 
 
 def get_capital_by_alpha3(alpha3: str) -> str:
+    """Get the capital city of a country given its alpha-3 ISO code.
+
+    Args:
+        alpha3 (str): The alpha-3 ISO code of the country.
+
+    Returns:
+        str: The capital city of the country.
+
+    Raises:
+        ValueError: If the alpha-3 code is invalid.
+        CountryNotFoundError: If the country cannot be found.
+        CapitalNotFoundError: If the capital cannot be found for the country.
+    """
     if len(alpha3) != 3:
         raise ValueError(f"Invalid ISO code {alpha3}, must be 3 characters long.")
 
