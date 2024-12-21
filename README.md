@@ -1,5 +1,6 @@
 # Country-Capitals
-Get the name of a country's capital city. That's it.
+[![PyPI Downloads](https://static.pepy.tech/badge/country-capitals)](https://pepy.tech/projects/country-capitals)
+Get the name of a country's capital city. That's pretty much it.
 
 ## Installation
 ```
