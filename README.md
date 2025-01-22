@@ -9,7 +9,7 @@ pip install country_capitals
 ```
 
 ## Usage
-You can lookup capitals by country name, code, or ISO numbers. Including `fuzzy=True` will try to use use a fuzzy matching algorithm to find the country name.
+You can lookup by country name, code, or ISO number. Including `fuzzy=True` uses a fuzzy matching algorithm to find the country name.
 ```python
 from country_capitals import get_capital
 
